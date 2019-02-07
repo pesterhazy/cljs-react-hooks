@@ -25,9 +25,40 @@
       [:button {:onClick #(dispatch {:type :inc})} "+"]
       [:button {:onClick #(dispatch {:type :dec})} "-"]])))
 
+(defn Effect
+  []
+  (let [[count setCount] (js/React.useState 0)]
+    (js/React.useEffect (fn []
+                          (set! (.-title js/document)
+                                (str "You clicked " count " times"))
+                          identity))
+
+    (html
+     [:div
+      [:p "You clicked " count " times"]
+      [:button {:onClick (fn [e] (setCount (inc count)))}
+       "Click Me"]])))
+
+(defn EmojiKeys
+  []
+  (let [happyPress (js/useKeyPress "h")
+        sadPress (js/useKeyPress "s")
+        robotPress (js/useKeyPress "r")
+        foxPress (js/useKeyPress "f")]
+    (html
+     [:div
+      [:div
+       "["
+       (when happyPress "😊")
+       (when sadPress "😢")
+       (when robotPress "🤖")
+       (when foxPress "🦊")
+       "]"]
+      [:div "h, s, r, f"]])))
+
 (defn mount
   []
-  (js/ReactDOM.render (e Counter {:count 7})
+  (js/ReactDOM.render (e EmojiKeys {})
                       (js/document.getElementById "app")))
 
 ;; This is called once
