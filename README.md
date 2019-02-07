@@ -12,7 +12,7 @@ Make sure you have the [Clojure CLI](https://clojure.org/guides/getting_started)
 scripts/dev
 ```
 
-Change the `root` component in sandbox.cljs as described in the comment to go through the individual examples mentioned in the blog post
+Change the `root` component in sandbox.cljs as described [in the comment](https://github.com/pesterhazy/cljs-react-hooks/blob/master/src/react/sandbox.cljs#L129) to go through the individual examples mentioned in the blog post
 
 # Acknowledgemnts
 
