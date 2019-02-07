@@ -9,20 +9,19 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn Example
+(defn ExampleHicada
   []
   (let [[count setCount] (js/React.useState 0)]
-    (e "div" nil
-       (e "p" nil "You clicked " count " times")
-       (e "button"
-          {:onClick
-           (fn [e]
-             (setCount (inc count)))}
-          "Click Me"))))
+    (html
+     [:div
+      [:p "You clicked the button " count " times"]
+      [:button {:onClick (fn [e]
+                           (setCount (inc count)))}
+       "Click Me"]])))
 
 (defn mount
   []
-  (js/ReactDOM.render (e Example {})
+  (js/ReactDOM.render (e ExampleHicada {})
                       (js/document.getElementById "app")))
 
 ;; This is called once
