@@ -56,9 +56,44 @@
        "]"]
       [:div "h, s, r, f"]])))
 
+(defn useLens
+  [a f]
+  (let [[value update-value] (js/React.useState (f @a))]
+    (js/React.useEffect
+     (fn []
+       (let [k (gensym "useLens")]
+         (add-watch a k
+                    (fn [_ _ _ new-state]
+                      (update-value (f new-state))))
+         (fn []
+           (remove-watch a k)))))
+    value))
+
+(defonce state-atom (atom {:foo 1
+                           :bar 1
+                           :baz 1}))
+
+(defn Stateful
+  []
+  (let [x (useLens state-atom #(* (:foo %) (:bar %)))
+        all (useLens state-atom identity)]
+    (html
+     [:div
+      "foo*bar = " [:strong x]
+      [:code [:pre (prn-str all)]]
+      [:button
+       {:onClick #(swap! state-atom update :foo inc)}
+       "More foo"]
+      [:button
+       {:onClick #(swap! state-atom update :bar inc)}
+       "More bar"]
+      [:button
+       {:onClick #(swap! state-atom update :baz inc)}
+       "More baz"]])))
+
 (defn mount
   []
-  (js/ReactDOM.render (e EmojiKeys {})
+  (js/ReactDOM.render (e Stateful {})
                       (js/document.getElementById "app")))
 
 ;; This is called once
