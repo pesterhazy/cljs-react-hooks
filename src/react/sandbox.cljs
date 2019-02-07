@@ -1,4 +1,5 @@
-(ns ^:figwheel-hooks react.sandbox)
+(ns ^:figwheel-hooks react.sandbox
+  (:require-macros [react.sandbox :refer [html]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
