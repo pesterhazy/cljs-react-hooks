@@ -9,19 +9,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn ExampleHicada
-  []
-  (let [[count setCount] (js/React.useState 0)]
+(defn counter-reducer
+  [state action]
+  (case (:type action)
+    :inc (update state :count inc)
+    :dec (update state :count dec)))
+
+(defn Counter
+  [initial-state]
+  (let [[state dispatch] (js/React.useReducer counter-reducer
+                                              (js->clj initial-state :keywordize-keys true))]
     (html
-     [:div
-      [:p "You clicked the button " count " times"]
-      [:button {:onClick (fn [e]
-                           (setCount (inc count)))}
-       "Click Me"]])))
+     [:*
+      "Count: " (:count state)
+      [:button {:onClick #(dispatch {:type :inc})} "+"]
+      [:button {:onClick #(dispatch {:type :dec})} "-"]])))
 
 (defn mount
   []
-  (js/ReactDOM.render (e ExampleHicada {})
+  (js/ReactDOM.render (e Counter {:count 7})
                       (js/document.getElementById "app")))
 
 ;; This is called once
