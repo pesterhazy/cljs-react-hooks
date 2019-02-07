@@ -18,7 +18,7 @@
 (defn hello-world [state]
   (sab/html [:div
              [:h1 (:text @state)]
-             [:h3 "Edit this in src/react/sandbox.cljs and watch it change!"]]))
+             [:h3 "Welcome"]]))
 
 (defn mount [el]
   (js/ReactDOM.render (hello-world app-state) el))
