@@ -9,6 +9,31 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defn Example
+  []
+  (let [[count setCount] (js/React.useState 0)]
+    (e "div" nil
+       (e "p" nil "You clicked " count " times")
+       (e "button"
+          {:onClick
+           (fn [e]
+             (setCount (inc count)))}
+          "Click Me"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn ExampleHicada
+  []
+  (let [[count setCount] (js/React.useState 0)]
+    (html
+     [:div
+      [:p "You clicked " count " times"]
+      [:button {:onClick (fn [e]
+                           (setCount (inc count)))}
+       "Click Me"]])))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn counter-reducer
   [state action]
   (case (:type action)
@@ -25,6 +50,8 @@
       [:button {:onClick #(dispatch {:type :inc})} "+"]
       [:button {:onClick #(dispatch {:type :dec})} "-"]])))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defn Effect
   []
   (let [[count setCount] (js/React.useState 0)]
@@ -38,6 +65,8 @@
       [:p "You clicked " count " times"]
       [:button {:onClick (fn [e] (setCount (inc count)))}
        "Click Me"]])))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn EmojiKeys
   []
@@ -55,6 +84,8 @@
        (when foxPress "🦊")
        "]"]
       [:div "h, s, r, f"]])))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn useLens
   [a f]
@@ -91,9 +122,15 @@
        {:onClick #(swap! state-atom update :baz inc)}
        "More baz"]])))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; pick the component to show here
+
+(def root Example) ;; or ExampleHicada, Counter, Effect, ...
+
 (defn mount
   []
-  (js/ReactDOM.render (e Stateful {})
+  (js/ReactDOM.render (e root {})
                       (js/document.getElementById "app")))
 
 ;; This is called once
