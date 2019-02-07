@@ -21,9 +21,8 @@
 
 (defn mount
   []
-  (js/ReactDOM.render
-   ((js/React.createFactory Example))
-   (js/document.getElementById "app")))
+  (js/ReactDOM.render (e Example {})
+                      (js/document.getElementById "app")))
 
 ;; This is called once
 (defonce init (mount))
