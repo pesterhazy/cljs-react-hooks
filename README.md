@@ -1,37 +1,19 @@
-# react.sandbox
+# cljs-react-hooks
 
-FIXME: Write a one-line description of your library/project.
+Try React Hooks from Clojurescript, using Figwheel Main
 
-## Overview
+This repo contains example code for https://juxt.pro/blog/posts/react-hooks-raw.html
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+# Usage
 
-## Development
+Make sure you have the [Clojure CLI](https://clojure.org/guides/getting_started) installed.
 
-To get an interactive development environment run:
+```
+scripts/dev
+```
 
-    clojure -A:fig:build
+Change the `root` component in sandbox.cljs as described in the comment to go through the individual examples mentioned in the blog post
 
-This will auto compile and send all changes to the browser without the
-need to reload. After the compilation process is complete, you will
-get a Browser Connected REPL. An easy way to try it is:
+# Acknowledgemnts
 
-    (js/alert "Am I connected?")
-
-and you should see an alert in the browser window.
-
-To clean all compiled files:
-
-    rm -rf target/public
-
-To create a production build run:
-
-	rm -rf target/public
-	clojure -A:fig:min
-
-
-## License
-
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+All credit goes to Dominic Monroe
